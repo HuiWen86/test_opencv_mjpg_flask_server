@@ -3,3 +3,15 @@
 #teplates 폴더 에 index.html 위치해야함
 
 **mjpg가 설치되었다는 가정하에 실행. 
+
+
+.
+
+├── mjpgstream.py
+├── static
+│   ├── css
+│   └── js
+├── templates
+│   ├── index.html
+
+
