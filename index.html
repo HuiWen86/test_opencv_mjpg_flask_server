@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캡처 버튼</title>
+    <style>
+        body {
+            position: relative;
+        }
+        #captureButton {
+           
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <img style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://localhost:8080/?action=stream">
+    <button id="captureButton" onclick="captureImage()">캡처하기</button>
+
+    <script>
+        function captureImage() {
+            // 캡처 명령어
+            var command = "ffmpeg -f MJPEG -y -i http://localhost:8080/?action=stream -vf 'drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text=%{localtime\\:%Y-%m-%d_%H-%M-%S}:x=(w-tw)/2:y=h-th-10:fontsize=24:fontcolor=white' -r 1 -vframes 1 -q:v 1 '/home/pi/Pictures/" + getCurrentDateTime() + ".jpg'";
+            
+            // 명령어를 서버로 보내고 실행하는 코드
+            // 여기에 삽입할 수 있습니다. (예: AJAX 요청 등)
+
+            // 실행 결과를 사용자에게 알림 (예: 성공 또는 실패 메시지 출력)
+            alert("이미지가 캡처되었습니다.");
+        }
+
+        function getCurrentDateTime() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = ('0' + (now.getMonth() + 1)).slice(-2);
+            var day = ('0' + now.getDate()).slice(-2);
+            var hours = ('0' + now.getHours()).slice(-2);
+            var minutes = ('0' + now.getMinutes()).slice(-2);
+            var seconds = ('0' + now.getSeconds()).slice(-2);
+            return year + "-" + month + "-" + day + "_" + hours + "-" + minutes + "-" + seconds;
+        }
+    </script>
+</body>
+</html>
+
